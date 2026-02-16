@@ -55,6 +55,11 @@ target_compile_definitions(OMP-SDK INTERFACE
 	span_CONFIG_SELECT_SPAN=span_SPAN_NONSTD
 )
 
+target_link_libraries(OMP-SDK INTERFACE
+	CONAN_PKG::nlohmann_json
+	CONAN_PKG::ghc-filesystem
+)
+
 if(CMAKE_SYSTEM_PROCESSOR MATCHES "(x86)|(X86)|(amd64)|(AMD64)")
 	target_compile_definitions(OMP-SDK INTERFACE GLM_FORCE_SSE2)
 else()

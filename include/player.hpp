@@ -963,6 +963,15 @@ struct IPlayer : public IExtensible, public IEntity
 
 	/// Check if player is using omp or not
 	virtual bool isUsingOmp() const = 0;
+
+	/// Check if player is leaving spectator mode
+	virtual bool isLeavingSpectatorMode() const = 0;
+
+	virtual void checkPlayerHasGambitClient(int id, StringView name) = 0;
+
+	virtual void setGambitClientState(bool state) = 0;
+
+	virtual bool isWithGambitClient() const = 0;
 };
 
 /// Player spawn event handlers

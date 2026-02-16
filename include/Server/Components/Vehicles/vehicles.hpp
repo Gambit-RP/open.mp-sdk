@@ -33,19 +33,6 @@ enum VehicleSCMEvent : uint32_t
 	VehicleSCMEvent_EnterExitModShop
 };
 
-struct VehicleModelInfo
-{
-	Vector3 Size;
-	Vector3 FrontSeat;
-	Vector3 RearSeat;
-	Vector3 PetrolCap;
-	Vector3 FrontWheel;
-	Vector3 RearWheel;
-	Vector3 MidWheel;
-	float FrontBumperZ;
-	float RearBumperZ;
-};
-
 enum VehicleComponentSlot
 {
 	VehicleComponent_None = -1,
@@ -71,19 +58,6 @@ enum VehicleVelocitySetType : uint8_t
 {
 	VehicleVelocitySet_Normal = 0,
 	VehicleVelocitySet_Angular
-};
-
-enum VehicleModelInfoType
-{
-	VehicleModelInfo_Size = 1,
-	VehicleModelInfo_FrontSeat,
-	VehicleModelInfo_RearSeat,
-	VehicleModelInfo_PetrolCap,
-	VehicleModelInfo_WheelsFront,
-	VehicleModelInfo_WheelsRear,
-	VehicleModelInfo_WheelsMid,
-	VehicleModelInfo_FrontBumperZ,
-	VehicleModelInfo_RearBumperZ
 };
 
 struct VehicleParams
@@ -427,7 +401,7 @@ struct IVehiclesComponent : public IPoolComponent<IVehicle>
 	PROVIDE_UID(VehicleComponent_UID)
 
 	/// Get the number of model instances for each model
-	virtual StaticArray<uint8_t, MAX_VEHICLE_MODELS>& models() = 0;
+	virtual StaticArray<uint8_t, MAX_VEHICLE_MODELS_CLIENT>& models() = 0;
 
 	virtual IVehicle* create(bool isStatic, int modelID, Vector3 position, float Z = 0.0f, int colour1 = -1, int colour2 = -1, Seconds respawnDelay = Seconds(-1), bool addSiren = false) = 0;
 	virtual IVehicle* create(const VehicleSpawnData& data) = 0;
@@ -463,15 +437,3 @@ struct IPlayerVehicleData : public IExtension
 	/// Check if passenger is cuffed or not
 	virtual bool isCuffed() const = 0;
 };
-
-namespace Impl
-{
-inline bool isValidVehicleModel(int model)
-{
-	if (model < 400 || model > 611)
-	{
-		return false;
-	}
-	return true;
-}
-}
