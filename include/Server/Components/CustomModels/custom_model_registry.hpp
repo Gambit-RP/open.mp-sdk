@@ -18,6 +18,7 @@ enum class CustomVehicleModelInfoType : int
 struct CustomVehicleModelView
 {
 	int Passengers = 0;
+	int Type = 0;
 	int GtaAnalog = -1;
 	Vector3 Size {};
 	Vector3 FrontSeat {};
