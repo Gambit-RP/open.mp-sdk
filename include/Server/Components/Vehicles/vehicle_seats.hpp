@@ -1,9 +1,6 @@
 #pragma once
 
-#include "vehicles.hpp"
-#include <types.hpp>
-
-#include "../../../../../Server/Source/launcher_impl.hpp"
+#include <Server/Components/CustomModels/custom_model_registry.hpp>
 
 namespace Impl
 {
@@ -11,14 +8,19 @@ namespace Impl
 /// Returns 0xFF for invalid vehicles, and returns 0 for vehicles with only a driver.
 inline uint8_t getVehiclePassengerSeats(int model)
 {
-	GambitClient& client = GambitClient::Instance();
+	ICustomModelRegistry& registry = getCustomModelRegistry();
 
-	if (!client.IsValidVehicleModel(model))
+	if (!registry.isValidVehicleModel(model))
 	{
 		return 0xFF;
 	}
 
-	GambitClient::VehicleModelInfo vehicle = client.GetVehicleModelInfo(model);
+	CustomVehicleModelView vehicle {};
+
+	if (!registry.getVehicleModel(model, vehicle))
+	{
+		return 0xFF;
+	}
 
 	return vehicle.Passengers;
 }

@@ -1,23 +1,22 @@
 #pragma once
 
 #include "vehicles.hpp"
+#include <Server/Components/CustomModels/custom_model_registry.hpp>
 #include <types.hpp>
-
-#include "../../../../../Server/Source/launcher_impl.hpp"
 
 namespace Impl
 {
 
-inline bool getVehicleModelInfo(int model, GambitClient::VehicleModelInfoType type, Vector3& out)
+inline bool getVehicleModelInfo(int model, CustomVehicleModelInfoType type, Vector3& out)
 {
-	GambitClient& client = GambitClient::Instance();
+	ICustomModelRegistry& registry = getCustomModelRegistry();
 
-	if (!client.IsValidVehicleModel(model))
+	if (!registry.isValidVehicleModel(model))
 	{
 		return false;
 	}
 
-	return client.GetVehicleModelData(model, GambitClient::VehicleModelInfoType(type), out);
+	return registry.getVehicleModelData(model, type, out);
 }
 
 }
