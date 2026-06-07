@@ -346,6 +346,12 @@ struct INetwork : public IExtensible
 
 	/// Update server parameters
 	virtual void update() = 0;
+
+	/// Attempt to broadcast a packet to a specific list of players on this network
+	virtual bool broadcastPacketToSome(Span<uint8_t> data, int channel, const FlatPtrHashSet<IPlayer>& players, const IPlayer* exceptPeer, bool dispatchEvents = true) = 0;
+
+	/// Attempt to broadcast an RPC to a specific list of players on this network
+	virtual bool broadcastRPCToSome(int id, Span<uint8_t> data, int channel, const FlatPtrHashSet<IPlayer>& players, const IPlayer* exceptPeer, bool dispatchEvents = true) = 0;
 };
 
 /// A component interface which allows for writing a network component
