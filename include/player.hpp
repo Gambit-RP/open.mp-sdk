@@ -972,6 +972,8 @@ struct IPlayer : public IExtensible, public IEntity
 	virtual void setGambitClientState(bool state) = 0;
 
 	virtual bool isWithGambitClient() const = 0;
+
+	virtual void addClothes(StringView clothesTexture, StringView clothesModel, int clothesType, bool send = true) = 0;
 };
 
 /// Player spawn event handlers
@@ -1132,4 +1134,33 @@ struct IPlayerPool : public IExtensible, public IReadOnlyPool<IPlayer>
 
 	/// Get the colour assigned to a player ID when it first connects.
 	virtual Colour getDefaultColour(int pid) const = 0;
+};
+
+enum class ClothesType : int
+{
+	Shirt = 0,
+	Head = 1,
+	Trousers = 2,
+	Shoes = 3,
+	TattoosLeftUpperArm = 4,
+	TattoosLeftLowerArm = 5,
+	TattoosRightUpperArm = 6,
+	TattoosRightLowerArm = 7,
+	TattoosBack = 8,
+	TattoosLeftChest = 9,
+	TattoosRightChest = 10,
+	TattoosStomach = 11,
+	TattoosLowerBack = 12,
+	Necklace = 13,
+	Watches = 14,
+	Glasses = 15,
+	Hats = 16,
+	Extra = 17,
+	Count
+};
+
+struct ClothesSlot
+{
+	HybridString<33> texture;
+	HybridString<33> model;
 };
