@@ -47,7 +47,7 @@ struct ICustomModelRegistry
 	virtual bool getSkinModel(int model, CustomSkinModelView& out) const = 0;
 };
 
-// Implemented by GambitClient in Server/Source/launcher_impl.hpp.
+// Implemented by GambitClient in libomp-gambit (Server/Source/launcher_impl.cpp).
 ICustomModelRegistry& getCustomModelRegistry();
 
 inline int resolveStreamSkinId(int skinId, const CustomSkinModelView& skinInfo, bool viewerIsGambitClient)
