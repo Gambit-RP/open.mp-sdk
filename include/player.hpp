@@ -1079,6 +1079,9 @@ struct IPlayerPool : public IExtensible, public IReadOnlyPool<IPlayer>
 	/// Returns a dispatcher to the PlayerUpdateEvent.
 	virtual IEventDispatcher<PlayerUpdateEventHandler>& getPlayerUpdateDispatcher() = 0;
 
+	/// Returns a dispatcher for stream-rate throttled player updates (streaming checks).
+	virtual IEventDispatcher<PlayerUpdateEventHandler>& getPlayerStreamUpdateDispatcher() = 0;
+
 	// Returns a dispatcher to the player pool event dispatcher.
 	virtual IEventDispatcher<PoolEventHandler<IPlayer>>& getPoolEventDispatcher() = 0;
 

@@ -356,6 +356,8 @@ struct ICore : public IExtensible, public ILogger
 /// Helper class to get streamer config properties
 struct StreamConfigHelper
 {
+	float getRadius() const { return *distance; }
+
 	float getDistanceSqr() const
 	{
 		const float dist = *distance;
