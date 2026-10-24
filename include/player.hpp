@@ -974,6 +974,12 @@ struct IPlayer : public IExtensible, public IEntity
 	virtual bool isWithGambitClient() const = 0;
 
 	virtual void addClothes(StringView clothesTexture, StringView clothesModel, int clothesType, bool send = true) = 0;
+
+	/// Select the authenticated character whose skins are defined in the server manifest.
+	virtual void setGambitCharacterId(uint32_t characterId) { }
+	virtual void refreshGambitCharacterSkin() { }
+	virtual uint32_t getGambitCharacterId() const { return 0; }
+	virtual void sendGambitCharacterSkinTo(IPlayer& viewer) const { }
 };
 
 /// Player spawn event handlers

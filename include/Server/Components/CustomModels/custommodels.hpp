@@ -40,6 +40,14 @@ struct IPlayerCustomModelsData : public IExtension
 };
 
 static const UID ModelsComponent_UID = UID(0x15E3CB1E7C77FFFF);
+struct GambitSkinAssetView
+{
+	HybridString<65> dffSHA256;
+	HybridString<65> txdSHA256;
+	HybridString<256> dffURL;
+	HybridString<256> txdURL;
+};
+
 struct ICustomModelsComponent : public IComponent
 {
 	PROVIDE_UID(ModelsComponent_UID);
@@ -50,4 +58,8 @@ struct ICustomModelsComponent : public IComponent
 	virtual StringView getModelNameFromChecksum(uint32_t checksum) const = 0;
 	virtual bool isValidCustomModel(int32_t modelId) const = 0;
 	virtual bool getCustomModelPath(int32_t modelId, StringView& dffPath, StringView& txdPath) const = 0;
+	virtual bool getGambitSkinAsset(uint32_t characterId, int baseSkinId, GambitSkinAssetView& out) const = 0;
+	virtual bool reloadGambitSkinManifest() = 0;
+	virtual bool queueGambitSkinRefresh(IPlayer& player) { return false; }
+	virtual bool queueGambitSkinViewerRefresh(IPlayer& player) { return false; }
 };
